@@ -14,4 +14,22 @@ function init() {
     recipesSection.appendChild(fragment);
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    const listboxToggle = document.getElementById('listboxIngredientsToggle');
+    const listboxContent = document.getElementById('listboxIngredientsContent');
+
+    listboxToggle.addEventListener('click', function() {
+       const isOpen = listboxContent.classList.contains('open');
+
+       if(isOpen) {
+           listboxContent.classList.remove('open');
+           listboxToggle.setAttribute('aria-expanded', 'false');
+       } else {
+              listboxContent.classList.add('open');
+              listboxToggle.setAttribute('aria-expanded', 'true');
+       }
+    });
+});
+
+
 init();

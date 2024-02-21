@@ -43,10 +43,10 @@ export function recipeTemplate(recipe) {
         });
         const recipeTitle = Object.assign(document.createElement('h4'), {
             className: 'text-xs font-bold text-grey',
-            textContent: 'Recette',
+            textContent: 'Recette'.toUpperCase(),
         });
         const recipeDescription = Object.assign(document.createElement('p'), {
-            className: 'text-sm text-black',
+            className: 'text-sm text-black line-clamp-4',
             textContent: description,
         });
         recipeContainer.append(recipeTitle, recipeDescription);
@@ -58,7 +58,7 @@ export function recipeTemplate(recipe) {
         });
         const ingredientsTitle = Object.assign(document.createElement('h4'), {
             className: 'text-xs font-bold text-grey',
-            textContent: 'Ingrédients',
+            textContent: 'Ingrédients'.toUpperCase(),
         });
         const ingredientsList = Object.assign(document.createElement('ul'), {
             className: 'grid grid-cols-2 gap-y-[1.31rem]',
