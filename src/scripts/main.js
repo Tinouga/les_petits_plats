@@ -4,16 +4,27 @@ import search from './utils/search.js';
 import filter from './utils/filter.js';
 
 function init() {
+    displayRecipes(recipes);
+}
+
+function displayRecipes(recipes) {
     const recipesSection = document.querySelector('.recipes-cards');
+
+    // Clear the recipes section
+    recipesSection.innerHTML = '';
+
     const fragment = document.createDocumentFragment();
 
     recipes.forEach(recipe => {
-       const recipeCardDOM =  recipeTemplate(recipe).getRecipeCardDOM();
+        const recipeCardDOM =  recipeTemplate(recipe).getRecipeCardDOM();
 
-       fragment.appendChild(recipeCardDOM);
+        fragment.appendChild(recipeCardDOM);
     });
 
     recipesSection.appendChild(fragment);
+
+    // update the recipes count
+    document.getElementById('recipesCount').textContent = `${recipes.length} recettes`;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -39,9 +50,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
        if(query.length >= 3) {
            const results = search(query);
-           console.log(results);
            const tags = filter(results);
-           console.log(tags);
+
+           displayRecipes(results);
+       } else {
+          displayRecipes(recipes);
        }
     });
 });

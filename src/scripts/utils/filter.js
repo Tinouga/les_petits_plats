@@ -1,3 +1,8 @@
+/**
+ * Generate 3 list of tags from a recipes list
+ * @param recipes
+ * @returns {{ingredients: string[], appliances: string[], ustensils: string[]}}
+ */
 export default function generateTags(recipes) {
     const ingredientsTags = new Set();
     const applianceTags = new Set();
