@@ -39,7 +39,7 @@
 </header>
 <main class="pt-[1.313rem] px-[6.375rem] pb-[12.563rem] flex flex-col gap-[3.438rem]">
     <header class="flex justify-end items-center relative h-[3.5rem]">
-        <div class="flex gap-16 absolute top-0 left-0 h-auto z-10">
+        <div class="flex items-start gap-16 absolute top-0 left-0 h-auto z-10">
             <div class="bg-white rounded-[0.6875rem] flex flex-col w-48">
                 <button type="button" id="listboxIngredientsToggle" class="inline-flex py-[1.06rem] px-4 justify-between items-center gap-[3.94rem] text-black"
                     aria-haspopup="listbox"
@@ -50,32 +50,43 @@
                         <path id="Vector 1" d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
                     </svg>
                 </button>
-                <div role="listbox" id="listboxIngredientsContent" class="listbox-content open px-4 flex flex-col gap-6" aria-label="Liste d'ingrédients">
+                <div role="listbox" id="listboxIngredientsContent" class="listbox-content px-4 flex flex-col gap-6" aria-label="Liste d'ingrédients">
                     <input type="search" class="rounded-[0.125rem] p-2 pr-8 border-light-grey focus:border-light-grey focus:ring-0 focus:ring-offset-0">
                     <ul class="flex flex-col gap-[0.813rem] text-sm text-black pb-[0.938rem]">
-                        <li>Crème de Coco</li>
-                        <li>Jus de citron</li>
-                        <li>Poivron rouge</li>
-                        <li>Poulet</li>
-                        <li>Thon en miettes</li>
                     </ul>
                 </div>
             </div>
-            <div class="relative">
-                <button type="button" class="inline-flex py-[1.06rem] px-4 justify-between items-center gap-[3.94rem] bg-white rounded-[0.6875rem] text-black">
+            <div class="bg-white rounded-[0.6875rem] flex flex-col w-48">
+                <button type="button" id="listboxAppliancesToggle" class="inline-flex py-[1.06rem] px-4 justify-between items-center gap-[3.94rem] text-black"
+                    aria-haspopup="listbox"
+                    aria-expanded="false"
+                >
                     Appareils
-                    <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path id="Vector 1" d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
                     </svg>
                 </button>
+                <div role="listbox" id="listboxAppliancesContent" class="listbox-content px-4 flex flex-col gap-6" aria-label="Liste d'appareils">
+                    <input type="search" class="rounded-[0.125rem] p-2 pr-8 border-light-grey focus:border-light-grey focus:ring-0 focus:ring-offset-0">
+                    <ul class="flex flex-col gap-[0.813rem] text-sm text-black pb-[0.938rem]">
+                    </ul>
+                </div>
             </div>
-            <div class="relative">
-                <button type="button" class="inline-flex py-[1.06rem] px-4 justify-between items-center gap-[3.94rem] bg-white rounded-[0.6875rem] text-black">
+            <div class="bg-white rounded-[0.6875rem] flex flex-col w-48">
+                <button type="button" id="listboxUstensilsToggle" class="inline-flex py-[1.06rem] px-4 justify-between items-center gap-[3.94rem] text-black"
+                    aria-haspopup="listbox"
+                    aria-expanded="false"
+                >
                     Ustensiles
-                    <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path id="Vector 1" d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
                     </svg>
                 </button>
+                <div role="listbox" id="listboxUstensilsContent" class="listbox-content px-4 flex flex-col gap-6" aria-label="Liste d'ustensiles">
+                    <input type="search" class="rounded-[0.125rem] p-2 pr-8 border-light-grey focus:border-light-grey focus:ring-0 focus:ring-offset-0">
+                    <ul class="flex flex-col gap-[0.813rem] text-sm text-black pb-[0.938rem]">
+                    </ul>
+                </div>
             </div>
         </div>
         <span class="text-black font-display text-[1.3125rem]" id="recipesCount"></span>
