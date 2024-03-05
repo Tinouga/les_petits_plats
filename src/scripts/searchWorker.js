@@ -1,15 +1,12 @@
 import search from './utils/search.js';
-import filter from './utils/filter.js';
+import { filterByTags, generateTags } from './utils/filter.js';
 
 self.onmessage = function(event) {
     const msg = event.data;
 
     switch(msg.type) {
         case 'search':
-            handleSearch(event.data.query);
-            break;
-        case 'filter':
-            handleFiltering(event.data.selectedTags);
+            handleSearch(msg.query, msg.selectedTags);
             break;
         default:
             console.error('Unknown message type', msg.type);
@@ -17,21 +14,17 @@ self.onmessage = function(event) {
     }
 }
 
-function handleSearch(query) {
-    if(query.length >= 3) {
+function handleSearch(query, selectedTags) {
         const results = search(query);
-        const tags = filter(results);
+        const filteredResults = filterByTags(results, selectedTags);
+
+        const tags = generateTags(filteredResults);
 
         self.postMessage({
             type: 'search',
             data: {
-                recipes: results,
+                recipes: filteredResults,
                 tags
             }
         });
-    }
-}
-
-function handleFiltering(selectedTags) {
-
 }

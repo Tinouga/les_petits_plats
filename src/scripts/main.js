@@ -2,22 +2,26 @@ import {recipes} from './recipes.js';
 import {recipeTemplate} from './templates/recipe.js';
 import {tagTemplate} from './templates/tag.js';
 import debounce from './utils/debounce.js';
-import filter from './utils/filter.js';
+import { generateTags } from './utils/filter.js';
 
 const INGREDIENTS = 'ingredients';
 const APPLIANCES = 'appliances';
 const USTENSILS = 'ustensils';
 
-function init() {
-    handleDefaultData();
-}
+let userQuery = ''; // used to store the search query that will be retrieved when filtering with tags
+const selectedTags = {
+    ingredients: [],
+    appliances: [],
+    ustensils: []
+};
 
-function handleDefaultData() {
+function init() {
     displayRecipes(recipes);
     // generate tags and populate the tags list
-    const tags = filter(recipes);
+    const tags = generateTags(recipes);
     populateTags(tags);
 }
+
 
 function displayRecipes(recipes) {
     const recipesSection = document.querySelector('.recipes-cards');
@@ -38,12 +42,6 @@ function displayRecipes(recipes) {
     // update the recipes count
     document.getElementById('recipesCount').textContent = `${recipes.length} recettes`;
 }
-
-const selectedTags = {
-    ingredients: [],
-    appliances: [],
-    ustensils: []
-};
 
 function populateTags(tags) {
     const selectedIngredientsList = document.getElementById('selectedIngredientsList');
@@ -87,11 +85,10 @@ function populateTagsList(type, list, tags, selectedTags) {
 function selectTag(tag, type) {
     selectedTags[type].push(tag); // add the tag to the selected tags
     searchWorker.postMessage({
-        type: 'filter',
+        type: 'search',
+        query: userQuery,
         selectedTags
     });
-    // todo either repopulate or remove+add the tag
-    // maybe repopulate to keep the tags in order
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -151,10 +148,19 @@ document.addEventListener('DOMContentLoaded', function () {
         if (query.length >= 3) {
             searchWorker.postMessage({
                 type: 'search',
-                query
+                query,
+                selectedTags
             });
+            // store the search query
+            userQuery = query;
         } else {
-            handleDefaultData();
+            searchWorker.postMessage({
+                type: 'search',
+                query: '',
+                selectedTags
+            });
+            // reset the search query
+            userQuery = '';
         }
     }, 150);
 

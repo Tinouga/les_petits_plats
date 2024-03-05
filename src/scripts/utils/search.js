@@ -10,7 +10,7 @@ import buildRegex from './regexBuilder.js';
  */
 export default function search(query) {
     if (query.length < 3) {
-        return [];
+        return recipes;
     }
     const results = [];
     const regex = buildRegex(query);
@@ -43,7 +43,7 @@ function ingredientsListToString(ingredients) {
  */
 export function search2(query) {
     if (query.length < 3) {
-        return [];
+        return recipes;
     }
 
     const regex = buildRegex(query);

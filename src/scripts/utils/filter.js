@@ -3,7 +3,7 @@
  * @param recipes
  * @returns {{ingredients: string[], appliances: string[], ustensils: string[]}}
  */
-export default function generateTags(recipes) {
+export function generateTags(recipes) {
     const ingredientsTags = new Set();
     const applianceTags = new Set();
     const ustensilsTags = new Set();
@@ -25,19 +25,29 @@ export default function generateTags(recipes) {
     };
 }
 
-function generateTags2(recipes) {
-    return recipes.reduce((tags, recipe) => {
-        recipe.ingredients.forEach(ingredient => {
-            tags.ingredients.add(ingredient.ingredient);
-        });
-        tags.appliances.add(recipe.appliance);
-        recipe.ustensils.forEach(ustensil => {
-            tags.ustensils.add(ustensil);
-        });
-       return tags;
-    }, {
-        ingredients: new Set(),
-        appliances: new Set(),
-        ustensils: new Set()
+export function filterByTags(recipes, selectedTags) {
+    return recipes.filter(recipe => {
+        return selectedTags.ingredients.every(tag => {
+                return recipe.ingredients.some(ingredient => ingredient.ingredient === tag);
+            }) &&
+            selectedTags.appliances.every(tag => recipe.appliance === tag) &&
+            selectedTags.ustensils.every(tag => recipe.ustensils.includes(tag))
     });
 }
+
+// function generateTags2(recipes) {
+//     return recipes.reduce((tags, recipe) => {
+//         recipe.ingredients.forEach(ingredient => {
+//             tags.ingredients.add(ingredient.ingredient);
+//         });
+//         tags.appliances.add(recipe.appliance);
+//         recipe.ustensils.forEach(ustensil => {
+//             tags.ustensils.add(ustensil);
+//         });
+//         return tags;
+//     }, {
+//         ingredients: new Set(),
+//         appliances: new Set(),
+//         ustensils: new Set()
+//     });
+// }
