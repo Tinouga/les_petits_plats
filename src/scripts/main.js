@@ -8,13 +8,16 @@ const INGREDIENTS = 'ingredients';
 const APPLIANCES = 'appliances';
 const USTENSILS = 'ustensils';
 
-let userQuery = ''; // used to store the search query that will be retrieved when filtering with tags
+let userQuery = ''; // used to store the search query that will be retrieved when filtering with tags - or when showing a custom error message
 const selectedTags = {
     ingredients: [],
     appliances: [],
     ustensils: []
 };
 
+/**
+ * Populate the page with recipes and tags
+ */
 function init() {
     displayRecipes(recipes);
     // generate tags and populate the tags list
@@ -61,6 +64,8 @@ function populateTags(tags) {
     populateTagsList(APPLIANCES, appliancesList, unselectedAppliances);
     populateTagsList(USTENSILS, selectedUstensilsList, selectedTags.ustensils, true);
     populateTagsList(USTENSILS, ustensilsList, unselectedUstensils);
+
+    populateTagChips();
 }
 
 function populateTagsList(type, list, tags, selectedTags) {
@@ -68,7 +73,7 @@ function populateTagsList(type, list, tags, selectedTags) {
 
     if (selectedTags) {
         tags.forEach(tag => {
-            const selectedTagDOM = tagTemplate(tag).getSelectedTagDOM();
+            const selectedTagDOM = tagTemplate(tag).getSelectedTagDOM(type, removeTag);
             fragment.appendChild(selectedTagDOM);
         });
     } else {
@@ -82,8 +87,41 @@ function populateTagsList(type, list, tags, selectedTags) {
     list.appendChild(fragment); // then populate it
 }
 
+function populateTagChips() {
+    const container = document.getElementById('chipTagsContainer');
+    const fragment = document.createDocumentFragment();
+
+    selectedTags.ingredients.forEach(tag => {
+        const chipTagDOM = tagTemplate(tag).getChipTagDOM(INGREDIENTS, removeTag);
+        fragment.appendChild(chipTagDOM);
+    });
+    selectedTags.appliances.forEach(tag => {
+        const chipTagDOM = tagTemplate(tag).getChipTagDOM(APPLIANCES, removeTag);
+        fragment.appendChild(chipTagDOM);
+    });
+    selectedTags.ustensils.forEach(tag => {
+        const chipTagDOM = tagTemplate(tag).getChipTagDOM(USTENSILS, removeTag);
+        fragment.appendChild(chipTagDOM);
+    });
+
+    container.innerHTML = ''; // clear the container
+    container.appendChild(fragment); // then populate it
+}
+
 function selectTag(tag, type) {
     selectedTags[type].push(tag); // add the tag to the selected tags
+    searchWorker.postMessage({
+        type: 'search',
+        query: userQuery,
+        selectedTags
+    });
+}
+
+function removeTag(tag, type) {
+    const index = selectedTags[type].indexOf(tag);
+    if(index !== -1) {
+        selectedTags[type].splice(index, 1); // remove the tag from the selected tags
+    }
     searchWorker.postMessage({
         type: 'search',
         query: userQuery,
@@ -154,6 +192,10 @@ document.addEventListener('DOMContentLoaded', function () {
             // store the search query
             userQuery = query;
         } else {
+            // if we already handled the case where the query has less than 3 characters, do nothing, no need to re-trigger a search
+            if(userQuery === '') {
+                return;
+            }
             searchWorker.postMessage({
                 type: 'search',
                 query: '',
@@ -185,8 +227,32 @@ searchWorker.onmessage = function (event) {
 
 function handleSearchResults(data) {
     const {recipes, tags} = data;
+
+    // if there are no recipe found, display a custom error message
+    if(recipes.length === 0) {
+        displayCustomErrorMessage();
+        // not returning since we'll show empty recipes and tags
+    } else {
+        clearErrorMessage();
+    }
+
     displayRecipes(recipes);
     populateTags(tags);
+}
+
+function displayCustomErrorMessage() {
+    const errorMessagesContainer = document.getElementById('searchErrorMessage');
+
+    errorMessagesContainer.textContent = `Aucune recette ne contient "${userQuery}", vous pouvez chercher "tarte aux pommes", "poisson", etc.`;
+    errorMessagesContainer.classList.remove('fade-out');
+    errorMessagesContainer.classList.add('fade-in');
+}
+
+function clearErrorMessage() {
+    const errorMessagesContainer = document.getElementById('searchErrorMessage');
+    errorMessagesContainer.classList.remove('fade-in');
+    errorMessagesContainer.classList.add('fade-out');
+    errorMessagesContainer.textContent = '';
 }
 
 

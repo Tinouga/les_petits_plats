@@ -9,7 +9,7 @@
           rel="stylesheet">
     <link rel="stylesheet" href="/build/main.css">
 </head>
-<body class="font-body flex flex-col bg-background">
+<body class="h-[100dvh] font-body flex flex-col bg-background">
 <header class="flex flex-col gap-[10.88rem] pt-[3.2rem] px-[4.3rem] pb-[11.79rem] bg-header bg-cover">
     <img src="./assets/images/logo.svg" alt="logo" class="h-6 self-start">
     <div class="flex flex-col gap-[1.84rem] mx-12"><!-- header__content -->
@@ -17,6 +17,7 @@
             Cherchez parmi plus de 1500 recettes<br/>
             du quotidien, simples et délicieuses
         </h1>
+<!--        <form class="self-center max-w-[60rem] w-full relative">-->
         <form class="self-center max-w-[60rem] w-full">
             <label for="search" class="sr-only">Rechercher</label>
             <div class="relative">
@@ -35,97 +36,106 @@
                     </svg>
                 </button>
             </div>
+<!--            <p class="search-error absolute top-full left-[0.63rem] right-[0.63rem] text-center mt-2 text-primary"></p>-->
         </form>
     </div>
 </header>
-<main class="pt-[1.313rem] px-[6.375rem] pb-[12.563rem] flex flex-col gap-[3.438rem]">
-    <header class="flex justify-end items-center relative h-[3.5rem]">
-        <div class="flex items-start gap-16 absolute top-0 left-0 h-auto z-10">
-            <div class="bg-white rounded-[0.6875rem] flex flex-col w-48 overflow-hidden	">
-                <button type="button" id="listboxIngredientsToggle"
-                        class="inline-flex py-[1.06rem] px-4 justify-between items-center gap-[3.94rem] text-black"
-                        aria-haspopup="listbox"
-                        aria-expanded="false"
-                >
-                    Ingrédients
-                    <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg"
-                         aria-hidden="true">
-                        <path id="Vector 1" d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
-                    </svg>
-                </button>
-                <div role="listbox" id="listboxIngredientsContent" class="listbox-content flex flex-col gap-4"
-                     aria-label="Liste d'ingrédients">
-                    <input type="search"
-                           class="mx-4 rounded-[0.125rem] p-2 pr-8 border-light-grey focus:border-light-grey focus:ring-0 focus:ring-offset-0">
-                    <ul id="selectedIngredientsList" class="selected-items flex flex-col text-sm text-black pb-[0.313rem]">
-<!--                        <li tabindex="0" class="flex justify-between items-center px-4 py-[0.563rem] bg-primary group">-->
-<!--                            <span class="group-hover:font-bold">Crème de coco</span>-->
-<!--                            <button type="button" class="opacity-0 group-hover:opacity-100 transition duration-300" aria-label="Remove crème de coco from the tags list.">-->
-<!--                                <svg width="17" height="17" viewBox="0 0 17 17" fill="none"-->
-<!--                                     xmlns="http://www.w3.org/2000/svg">-->
-<!--                                    <circle cx="8.5" cy="8.5" r="8.5" fill="black"/>-->
-<!--                                    <path d="M11 11L8.5 8.5M8.5 8.5L6 6M8.5 8.5L11 6M8.5 8.5L6 11" stroke="#FFD15B"-->
-<!--                                          stroke-linecap="round" stroke-linejoin="round"/>-->
-<!--                                </svg>-->
-<!--                            </button>-->
-<!--                        </li>-->
-                    </ul>
-                    <ul id="ingredientsList" class="flex flex-col text-sm text-black pb-[0.938rem]">
-<!--                        <li tabindex="0">-->
-<!--                            <button type="button" class="h-full w-full px-4 py-[0.563rem] text-start hover:bg-primary">Crème de coco</button>-->
-<!--                        </li>-->
-                    </ul>
+<main class="pt-[1.313rem] px-[6.375rem] pb-[12.563rem] flex flex-col gap-[3.438rem] relative flex-1">
+    <header class="flex flex-col gap-[1.313rem]">
+        <div class="flex justify-end items-center relative h-[3.5rem]">
+            <div class="flex items-start gap-16 absolute top-0 left-0 h-auto z-10">
+                <div class="filter-container bg-white rounded-[0.6875rem] flex flex-col w-48 overflow-hidden	">
+                    <button type="button" id="listboxIngredientsToggle"
+                            class="inline-flex py-[1.06rem] px-4 justify-between items-center gap-[3.94rem] text-black"
+                            aria-haspopup="listbox"
+                            aria-expanded="false"
+                    >
+                        Ingrédients
+                        <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg"
+                             aria-hidden="true">
+                            <path id="Vector 1" d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div role="listbox" id="listboxIngredientsContent" class="listbox-content flex flex-col gap-4"
+                         aria-label="Liste d'ingrédients">
+                        <input type="search"
+                               class="mx-4 rounded-[0.125rem] p-2 pr-8 border-light-grey focus:border-light-grey focus:ring-0 focus:ring-offset-0">
+                        <div class="lists-container flex flex-col gap-4 overflow-y-auto">
+                            <ul id="selectedIngredientsList"
+                                class="selected-items flex flex-col text-sm text-black pb-[0.313rem]">
+                            </ul>
+                            <ul id="ingredientsList" class="flex flex-col text-sm text-black pb-[0.938rem]">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-container bg-white rounded-[0.6875rem] flex flex-col w-48 overflow-hidden	">
+                    <button type="button" id="listboxAppliancesToggle"
+                            class="inline-flex py-[1.06rem] px-4 justify-between items-center gap-[3.94rem] text-black"
+                            aria-haspopup="listbox"
+                            aria-expanded="false"
+                    >
+                        Appareils
+                        <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg"
+                             aria-hidden="true">
+                            <path id="Vector 1" d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div role="listbox" id="listboxAppliancesContent" class="listbox-content flex flex-col gap-4"
+                         aria-label="Liste d'appareils">
+                        <input type="search"
+                               class="mx-4 rounded-[0.125rem] p-2 pr-8 border-light-grey focus:border-light-grey focus:ring-0 focus:ring-offset-0">
+                        <div class="lists-container flex flex-col gap-4 overflow-y-auto">
+                            <ul id="selectedAppliancesList"
+                                class="selected-items flex flex-col text-sm text-black pb-[0.313rem]">
+                            </ul>
+                            <ul id="appliancesList" class="flex flex-col text-sm text-black pb-[0.938rem]">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-container bg-white rounded-[0.6875rem] flex flex-col w-48 overflow-hidden	">
+                    <button type="button" id="listboxUstensilsToggle"
+                            class="inline-flex py-[1.06rem] px-4 justify-between items-center gap-[3.94rem] text-black"
+                            aria-haspopup="listbox"
+                            aria-expanded="false"
+                    >
+                        Ustensiles
+                        <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg"
+                             aria-hidden="true">
+                            <path id="Vector 1" d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div role="listbox" id="listboxUstensilsContent" class="listbox-content flex flex-col gap-4"
+                         aria-label="Liste d'ustensiles">
+                        <input type="search"
+                               class="mx-4 rounded-[0.125rem] p-2 pr-8 border-light-grey focus:border-light-grey focus:ring-0 focus:ring-offset-0">
+                        <div class="lists-container flex flex-col gap-4 overflow-y-auto">
+                            <ul id="selectedUstensilsList"
+                                class="selected-items flex flex-col text-sm text-black pb-[0.313rem]">
+                            </ul>
+                            <ul id="ustensilsList" class="flex flex-col text-sm text-black pb-[0.938rem]">
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="bg-white rounded-[0.6875rem] flex flex-col w-48 overflow-hidden	">
-                <button type="button" id="listboxAppliancesToggle"
-                        class="inline-flex py-[1.06rem] px-4 justify-between items-center gap-[3.94rem] text-black"
-                        aria-haspopup="listbox"
-                        aria-expanded="false"
-                >
-                    Appareils
-                    <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg"
-                         aria-hidden="true">
-                        <path id="Vector 1" d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
-                    </svg>
-                </button>
-                <div role="listbox" id="listboxAppliancesContent" class="listbox-content flex flex-col gap-4"
-                     aria-label="Liste d'appareils">
-                    <input type="search"
-                           class="mx-4 rounded-[0.125rem] p-2 pr-8 border-light-grey focus:border-light-grey focus:ring-0 focus:ring-offset-0">
-                    <ul id="selectedAppliancesList" class="selected-items flex flex-col text-sm text-black pb-[0.313rem]">
-                    </ul>
-                    <ul id="appliancesList" class="flex flex-col text-sm text-black pb-[0.938rem]">
-                    </ul>
-                </div>
-            </div>
-            <div class="bg-white rounded-[0.6875rem] flex flex-col w-48 overflow-hidden	">
-                <button type="button" id="listboxUstensilsToggle"
-                        class="inline-flex py-[1.06rem] px-4 justify-between items-center gap-[3.94rem] text-black"
-                        aria-haspopup="listbox"
-                        aria-expanded="false"
-                >
-                    Ustensiles
-                    <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg"
-                         aria-hidden="true">
-                        <path id="Vector 1" d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
-                    </svg>
-                </button>
-                <div role="listbox" id="listboxUstensilsContent" class="listbox-content flex flex-col gap-4"
-                     aria-label="Liste d'ustensiles">
-                    <input type="search"
-                           class="mx-4 rounded-[0.125rem] p-2 pr-8 border-light-grey focus:border-light-grey focus:ring-0 focus:ring-offset-0">
-                    <ul id="selectedUstensilsList" class="selected-items flex flex-col text-sm text-black pb-[0.313rem]">
-                    </ul>
-                    <ul id="ustensilsList" class="flex flex-col text-sm text-black pb-[0.938rem]">
-                    </ul>
-                </div>
-            </div>
+            <span class="text-black font-display text-[1.3125rem]" id="recipesCount"></span>
         </div>
-        <span class="text-black font-display text-[1.3125rem]" id="recipesCount"></span>
+        <ul id="chipTagsContainer" class="flex flex-wrap gap-4">
+            <!--            <li class="flex justify-between items-center gap-[3.75rem] px-[1.125rem] py-[1.063rem] rounded-[0.625rem] bg-primary">-->
+            <!--                <span>Crème de coco</span>-->
+            <!--                <button type="button" aria-label="Remove crème de coco from the tags list.">-->
+            <!--                    <svg width="0.625rem" height="0.625rem" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+            <!--                        <path d="M15 15L8.5 8.5M8.5 8.5L2 2M8.5 8.5L15 2M8.5 8.5L2 15" stroke="#1B1B1B" stroke-width="2.16667" stroke-linecap="round" stroke-linejoin="round"/>-->
+            <!--                    </svg>-->
+            <!--                </button>-->
+            <!--            </li>-->
+        </ul>
     </header>
     <section class="recipes-cards grid grid-cols-3 gap-x-12 gap-y-16">
     </section>
+    <p id="searchErrorMessage" class="error-message absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></p>
 </main>
 <script type="module" src="./src/scripts/main.js"></script>
 </body>
