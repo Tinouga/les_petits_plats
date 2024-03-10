@@ -22,7 +22,7 @@ module.exports = {
         }]
       },
       backgroundImage: {
-        'header': "url('../les_petits_plats/assets/images/bg_header.png')",
+        'header': "url('../assets/images/bg_header.png')",
       }
     },
   },
