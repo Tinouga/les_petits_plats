@@ -71,17 +71,14 @@ function populateTags(tags) {
 function populateTagsList(type, list, tags, selectedTags) {
     const fragment = document.createDocumentFragment();
 
-    if (selectedTags) {
-        tags.forEach(tag => {
-            const selectedTagDOM = tagTemplate(tag).getSelectedTagDOM(type, removeTag);
-            fragment.appendChild(selectedTagDOM);
-        });
-    } else {
-        tags.forEach(tag => {
-            const tagDOM = tagTemplate(tag).getTagDOM(type, selectTag);
-            fragment.appendChild(tagDOM);
-        });
+    const getTagDOM = (tag, cbFunction) => {
+        return selectedTags ? tagTemplate(tag).getSelectedTagDOM(type, cbFunction) : tagTemplate(tag).getTagDOM(type, cbFunction);
     }
+
+    tags.forEach(tag => {
+        const tagDOM = getTagDOM(tag, selectedTags ? removeTag : selectTag);
+        fragment.appendChild(tagDOM);
+    });
 
     list.innerHTML = ''; // clear the list
     list.appendChild(fragment); // then populate it
@@ -91,18 +88,16 @@ function populateTagChips() {
     const container = document.getElementById('chipTagsContainer');
     const fragment = document.createDocumentFragment();
 
-    selectedTags.ingredients.forEach(tag => {
-        const chipTagDOM = tagTemplate(tag).getChipTagDOM(INGREDIENTS, removeTag);
+    const addChipTag = (tag, category) => {
+        const chipTagDOM = tagTemplate(tag).getChipTagDOM(category, removeTag);
         fragment.appendChild(chipTagDOM);
-    });
-    selectedTags.appliances.forEach(tag => {
-        const chipTagDOM = tagTemplate(tag).getChipTagDOM(APPLIANCES, removeTag);
-        fragment.appendChild(chipTagDOM);
-    });
-    selectedTags.ustensils.forEach(tag => {
-        const chipTagDOM = tagTemplate(tag).getChipTagDOM(USTENSILS, removeTag);
-        fragment.appendChild(chipTagDOM);
-    });
+    }
+
+    for(const category in selectedTags) {
+        selectedTags[category].forEach(tag => {
+            addChipTag(tag, category.toUpperCase());
+        });
+    }
 
     container.innerHTML = ''; // clear the container
     container.appendChild(fragment); // then populate it
