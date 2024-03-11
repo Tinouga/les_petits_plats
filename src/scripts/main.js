@@ -95,7 +95,7 @@ function populateTagChips() {
 
     for(const category in selectedTags) {
         selectedTags[category].forEach(tag => {
-            addChipTag(tag, category.toUpperCase());
+            addChipTag(tag, category);
         });
     }
 
@@ -113,6 +113,7 @@ function selectTag(tag, type) {
 }
 
 function removeTag(tag, type) {
+    console.log(tag, type);
     const index = selectedTags[type].indexOf(tag);
     if(index !== -1) {
         selectedTags[type].splice(index, 1); // remove the tag from the selected tags

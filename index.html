@@ -53,12 +53,14 @@
                         Ingrédients
                         <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg"
                              aria-hidden="true">
-                            <path id="Vector 1" d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
+                            <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
                         </svg>
                     </button>
                     <div role="listbox" id="listboxIngredientsContent" class="listbox-content flex flex-col gap-4"
                          aria-label="Liste d'ingrédients">
+                        <label for="ingredientsSearch" class="sr-only">Rechercher un ingrédient</label>
                         <input type="search"
+                               id="ingredientsSearch"
                                class="mx-4 rounded-[0.125rem] p-2 pr-8 border-light-grey focus:border-light-grey focus:ring-0 focus:ring-offset-0">
                         <div class="lists-container flex flex-col gap-4 overflow-y-auto">
                             <ul id="selectedIngredientsList"
@@ -78,12 +80,14 @@
                         Appareils
                         <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg"
                              aria-hidden="true">
-                            <path id="Vector 1" d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
+                            <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
                         </svg>
                     </button>
                     <div role="listbox" id="listboxAppliancesContent" class="listbox-content flex flex-col gap-4"
                          aria-label="Liste d'appareils">
+                        <label for="appliancesSearch" class="sr-only">Rechercher un appareil</label>
                         <input type="search"
+                               id="appliancesSearch"
                                class="mx-4 rounded-[0.125rem] p-2 pr-8 border-light-grey focus:border-light-grey focus:ring-0 focus:ring-offset-0">
                         <div class="lists-container flex flex-col gap-4 overflow-y-auto">
                             <ul id="selectedAppliancesList"
@@ -103,12 +107,14 @@
                         Ustensiles
                         <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg"
                              aria-hidden="true">
-                            <path id="Vector 1" d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
+                            <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
                         </svg>
                     </button>
                     <div role="listbox" id="listboxUstensilsContent" class="listbox-content flex flex-col gap-4"
                          aria-label="Liste d'ustensiles">
+                        <label for="ustensilsSearch" class="sr-only">Rechercher un ustensile</label>
                         <input type="search"
+                               id="ustensilsSearch"
                                class="mx-4 rounded-[0.125rem] p-2 pr-8 border-light-grey focus:border-light-grey focus:ring-0 focus:ring-offset-0">
                         <div class="lists-container flex flex-col gap-4 overflow-y-auto">
                             <ul id="selectedUstensilsList"
