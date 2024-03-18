@@ -1,4 +1,4 @@
-import {recipes} from './recipes.js';
+import {recipes} from './data/recipes.js';
 import {recipeTemplate} from './templates/recipe.js';
 import {tagTemplate} from './templates/tag.js';
 import debounce from './utils/debounce.js';
@@ -16,7 +16,7 @@ const selectedTags = {
 };
 
 /**
- * Populate the page with recipes and tags
+ * Populate the page with all the recipes and tags
  */
 function init() {
     displayRecipes(recipes);
@@ -25,7 +25,10 @@ function init() {
     populateTags(tags);
 }
 
-
+/**
+ * Display the recipes
+ * @param recipes
+ */
 function displayRecipes(recipes) {
     const recipesSection = document.querySelector('.recipes-cards');
 
@@ -46,6 +49,10 @@ function displayRecipes(recipes) {
     document.getElementById('recipesCount').textContent = `${recipes.length} recettes`;
 }
 
+/**
+ * Populate the tags
+ * @param tags
+ */
 function populateTags(tags) {
     const selectedIngredientsList = document.getElementById('selectedIngredientsList');
     const ingredientsList = document.getElementById('ingredientsList');
@@ -68,6 +75,14 @@ function populateTags(tags) {
     populateTagChips();
 }
 
+/**
+ * Helper function to populate the tags list
+ * Results will differ if the tags are selected by the user or not
+ * @param type
+ * @param list
+ * @param tags
+ * @param selectedTags
+ */
 function populateTagsList(type, list, tags, selectedTags) {
     const fragment = document.createDocumentFragment();
 
@@ -84,6 +99,9 @@ function populateTagsList(type, list, tags, selectedTags) {
     list.appendChild(fragment); // then populate it
 }
 
+/**
+ * Populate the tag chips using the selected tags
+ */
 function populateTagChips() {
     const container = document.getElementById('chipTagsContainer');
     const fragment = document.createDocumentFragment();
@@ -103,6 +121,11 @@ function populateTagChips() {
     container.appendChild(fragment); // then populate it
 }
 
+/**
+ * Select a tag - add it to the selected tags and trigger a new search
+ * @param tag
+ * @param type
+ */
 function selectTag(tag, type) {
     selectedTags[type].push(tag); // add the tag to the selected tags
     searchWorker.postMessage({
@@ -112,6 +135,11 @@ function selectTag(tag, type) {
     });
 }
 
+/**
+ * Remove a tag - remove it from the selected tags and trigger a new search
+ * @param tag
+ * @param type
+ */
 function removeTag(tag, type) {
     console.log(tag, type);
     const index = selectedTags[type].indexOf(tag);
@@ -142,6 +170,11 @@ document.addEventListener('DOMContentLoaded', function () {
     handleListbox(ustensilsToggle, ustensilsContent);
 });
 
+/**
+ * Handle a listbox behavior
+ * @param toggle
+ * @param content
+ */
 function handleListbox(toggle, content) {
     const searchInput = content.querySelector('input');
 
@@ -178,6 +211,7 @@ function handleListbox(toggle, content) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    // using a debounce function to prevent the ui from being unresponsive/janky
     const debouncedSearch = debounce(function (query) {
         if (query.length >= 3) {
             searchWorker.postMessage({
@@ -208,6 +242,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+/**
+ * Instantiate a new worker to handle the search
+ * Since we might need to search/filter up to 1500 recipes, we'll use a web worker for performance reasons - not to interfere with the UI
+ */
 const searchWorker = new Worker('./src/scripts/searchWorker.js', {type: 'module'});
 searchWorker.onmessage = function (event) {
     const msg = event.data;
@@ -251,5 +289,5 @@ function clearErrorMessage() {
     errorMessagesContainer.textContent = '';
 }
 
-
+// populate the page with recipes and tags when the app starts
 init();

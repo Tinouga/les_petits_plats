@@ -12,12 +12,11 @@
 <body class="h-[100dvh] font-body flex flex-col bg-background">
 <header class="flex flex-col gap-[10.88rem] pt-[3.2rem] px-[4.3rem] pb-[11.79rem] bg-header bg-cover">
     <img src="./assets/images/logo.svg" alt="logo" class="h-6 self-start">
-    <div class="flex flex-col gap-[1.84rem] mx-12"><!-- header__content -->
+    <div class="flex flex-col gap-[1.84rem] mx-12">
         <h1 class="text-primary text-5xl font-display text-center">
-            Cherchez parmi plus de 1500 recettes<br/>
+            Cherchez parmi plus de 1500 recettes<br>
             du quotidien, simples et délicieuses
         </h1>
-<!--        <form class="self-center max-w-[60rem] w-full relative">-->
         <form class="self-center max-w-[60rem] w-full">
             <label for="search" class="sr-only">Rechercher</label>
             <div class="relative">
@@ -36,7 +35,6 @@
                     </svg>
                 </button>
             </div>
-<!--            <p class="search-error absolute top-full left-[0.63rem] right-[0.63rem] text-center mt-2 text-primary"></p>-->
         </form>
     </div>
 </header>
@@ -129,19 +127,11 @@
             <span class="text-black font-display text-[1.3125rem]" id="recipesCount"></span>
         </div>
         <ul id="chipTagsContainer" class="flex flex-wrap gap-4">
-            <!--            <li class="flex justify-between items-center gap-[3.75rem] px-[1.125rem] py-[1.063rem] rounded-[0.625rem] bg-primary">-->
-            <!--                <span>Crème de coco</span>-->
-            <!--                <button type="button" aria-label="Remove crème de coco from the tags list.">-->
-            <!--                    <svg width="0.625rem" height="0.625rem" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-            <!--                        <path d="M15 15L8.5 8.5M8.5 8.5L2 2M8.5 8.5L15 2M8.5 8.5L2 15" stroke="#1B1B1B" stroke-width="2.16667" stroke-linecap="round" stroke-linejoin="round"/>-->
-            <!--                    </svg>-->
-            <!--                </button>-->
-            <!--            </li>-->
         </ul>
     </header>
     <section class="recipes-cards grid grid-cols-3 gap-x-12 gap-y-16">
     </section>
-    <p id="searchErrorMessage" class="error-message absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></p>
+    <p id="searchErrorMessage" class="error-message text-xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></p>
 </main>
 <script type="module" src="./src/scripts/main.js"></script>
 </body>

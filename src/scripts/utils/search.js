@@ -1,4 +1,4 @@
-import {recipes} from '../recipes.js';
+import {recipes} from '../data/recipes.js';
 import buildRegex from './regexBuilder.js';
 
 
@@ -9,6 +9,7 @@ import buildRegex from './regexBuilder.js';
  * @returns {*[]}
  */
 export default function search(query) {
+    // if the query is less than 3 characters, return all the recipes
     if (query.length < 3) {
         return recipes;
     }
@@ -27,29 +28,15 @@ export default function search(query) {
     return results;
 }
 
+/**
+ * Convert an array of ingredients to a string
+ * @param ingredients
+ * @returns {string}
+ */
 function ingredientsListToString(ingredients) {
     let str = '';
     for (let i = 0; i < ingredients.length; i++) {
         str += `${ingredients[i].ingredient} `;
     }
     return str;
-}
-
-/**
- * Search for recipes matching the query
- * use array methods
- * @param query
- * @returns {*[]}
- */
-export function search2(query) {
-    if (query.length < 3) {
-        return recipes;
-    }
-
-    const regex = buildRegex(query);
-
-    return recipes.filter(recipe => {
-        const searchString = `${recipe.name} ${recipe.description} ${recipe.ingredients.map(ingredient => ingredient.ingredient).join(' ')}`;
-        return regex.test(searchString);
-    });
 }

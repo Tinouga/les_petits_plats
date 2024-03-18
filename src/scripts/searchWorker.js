@@ -14,6 +14,13 @@ self.onmessage = function(event) {
     }
 }
 
+/**
+ * Search the recipes with the query and the selected tags,
+ * generate a list of tags matching the filtered recipes
+ * and send the result (filtered recipes and generated tags) to the main thread
+ * @param query
+ * @param selectedTags
+ */
 function handleSearch(query, selectedTags) {
         const results = search(query);
         const filteredResults = filterByTags(results, selectedTags);

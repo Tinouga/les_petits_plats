@@ -34,20 +34,3 @@ export function filterByTags(recipes, selectedTags) {
             selectedTags.ustensils.every(tag => recipe.ustensils.includes(tag))
     });
 }
-
-// function generateTags2(recipes) {
-//     return recipes.reduce((tags, recipe) => {
-//         recipe.ingredients.forEach(ingredient => {
-//             tags.ingredients.add(ingredient.ingredient);
-//         });
-//         tags.appliances.add(recipe.appliance);
-//         recipe.ustensils.forEach(ustensil => {
-//             tags.ustensils.add(ustensil);
-//         });
-//         return tags;
-//     }, {
-//         ingredients: new Set(),
-//         appliances: new Set(),
-//         ustensils: new Set()
-//     });
-// }
